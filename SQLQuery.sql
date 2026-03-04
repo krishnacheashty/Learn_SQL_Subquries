@@ -84,4 +84,25 @@ Price,
 FROM Sales.Products
 WHERE Price > (SELECT AVG(Price) FROM Sales.Products)
 
+--show the details of orders made by customers in garmany.
+
+select 
+o.*
+from Sales.Orders o
+where o.CustomerID in  (
+						select 
+						CustomerID 
+						from Sales.Customers 
+						where Country='Germany')
+
+--							TASK-5
+-- find female employees whose salaries then the salaries
+--of any male employees
+SELECT
+EmployeeID,
+FirstName,
+Salary
+FROM Sales.Employees
+WHERE Gender = 'F' 
+AND Salary > ANY (SELECT Salary FROM Sales.Employees WHERE Gender='M')
 
