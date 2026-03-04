@@ -42,3 +42,26 @@ SELECT
 	--subquery
 	(SELECT COUNT(*) TotalOrders FROM Sales.Orders) AS TotalOrders
 FROM Sales.Products
+
+
+--					join clause
+/* join subquery
+-->used to prepare the data(filterin or aggregation) before
+joining it with other tables.*/
+
+--					Task-4
+-- Show all customer details and find the total orders of
+-- each customer
+--MAIN QUERY
+SELECT
+C.*,
+O.TotalCount
+FROM Sales.Customers C
+LEFT JOIN(
+	SELECT
+	CustomerID,
+	COUNT(*) TotalCount
+	FROM Sales.Orders O
+	GROUP BY CustomerID) o
+ON C.CustomerID= O.CustomerID
+
