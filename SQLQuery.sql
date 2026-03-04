@@ -25,3 +25,20 @@ FROM(
 	GROUP BY CustomerID
 )t 
 
+
+--select subquery
+/*used to aggregate data side by side with the -
+main query's data,allowing for direct comparison
+--> Rule: only scalar subquries are allowed tobe used
+*/
+
+--					task-3
+--show the product IDs, product name, prices, and the total number of orders.
+
+SELECT 
+	ProductID,
+	Product,
+	Price,
+	--subquery
+	(SELECT COUNT(*) TotalOrders FROM Sales.Orders) AS TotalOrders
+FROM Sales.Products
