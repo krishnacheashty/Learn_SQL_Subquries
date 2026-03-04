@@ -65,3 +65,23 @@ LEFT JOIN(
 	GROUP BY CustomerID) o
 ON C.CustomerID= O.CustomerID
 
+/*					WHERE SUBQUERY
+
+Used for complex filtering logic logic and makes query
+more flexible and dynamic.
+
+Rules: Only Scalar Subqueries are allowed to be used
+*/
+
+--					Task-4
+--find the products that have a price higher than the 
+--average price of all products.
+
+SELECT
+ProductID,
+Price,
+(SELECT AVG(Price) FROM Sales.Products) AvgPrice
+FROM Sales.Products
+WHERE Price > (SELECT AVG(Price) FROM Sales.Products)
+
+
