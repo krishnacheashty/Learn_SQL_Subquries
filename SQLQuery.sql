@@ -106,3 +106,15 @@ FROM Sales.Employees
 WHERE Gender = 'F' 
 AND Salary > ANY (SELECT Salary FROM Sales.Employees WHERE Gender='M')
 
+--		Non-Correlated| Correlated (subqueries)
+
+
+--							task-06
+
+--show all customer details and find the total orders of each customer.
+
+SELECT 
+*,
+(SELECT COUNT(*) FROM Sales.Orders AS O WHERE O.CustomerID=C.CustomerID) TotalSales
+FROM Sales.Customers AS C
+
